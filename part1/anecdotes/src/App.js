@@ -25,7 +25,7 @@ const App = () => {
   
   const len = anecdotes.length
   const [selected, setSelected] = useState(0)
-  const [points, setVote] = useState(Array(anecdotes.length).fill(0))
+  const [points, setVote] = useState(Array(len).fill(0))
   
   return (
     <div>
