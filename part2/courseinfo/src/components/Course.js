@@ -1,33 +1,34 @@
-import React from "react"
-
-const Header = ({name}) => {
-  return (
-    <div>
-      <h1>Web development curriculum</h1>
-      <h2>{name}</h2>
-    </div>
-  )
-}
-
-const Content = ({parts}) => parts.map(part => <Part key={part.id} part={part} />)
+const Header = ({course}) => <h2>{course.name}</h2>
 
 const Part = ({part}) => <p>{part.name} {part.exercises}</p>
 
-const Total = ({parts}) => {
-  const total = parts.reduce((a, b) => a + b.exercises, 0)
-  return <p><strong>total of {total} exercises</strong></p> 
+const Total = ({parts}) => <p><b>total of {parts
+    .reduce((a, c) => c.exercises + a, 0)} exercises</b></p>
+
+const Content = ({parts}) => {
+    return (
+        parts.map(part => 
+            <Part part={part} key={part.id}/>
+        )
+    )
 }
 
-const Course = ({course}) => {
+const Course = ({courses}) => {
     return (
-      course.map(x => 
-        <div key={x.id}>
-          <Header name={course[x.id-1].name} />
-          <Content parts={course[x.id-1].parts} />
-          <Total parts={course[x.id-1].parts} />
-        </div>
-      )
+        <>
+            <h1>Web development curriculum</h1>
+            {courses.map(course => {
+                return (
+                    <div key={course.id}> 
+                        <Header course={course} />
+                        <Content parts={course.parts} />
+                        <Total parts={course.parts} />
+                    </div>
+                    
+                )
+            })}
+        </>
     )
-  }
+}
 
 export default Course
